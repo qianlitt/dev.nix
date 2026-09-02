@@ -7,6 +7,10 @@
 
   outputs = {self, ...} @ inputs: {
     templates = {
+      rust = {
+        path = ./rust;
+        description = "Rust development environment";
+      };
     };
   };
 }
