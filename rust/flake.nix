@@ -11,7 +11,7 @@
   };
 
   outputs = {
-    self,
+    nixpkgs,
     flake-parts,
     rust-overlay,
     ...
@@ -24,11 +24,11 @@
         "aarch64-darwin"
       ];
 
-      perSystem = {
-        inputs',
-        pkgs,
-        ...
-      }: let
+      perSystem = {system, ...}: let
+        overlays = [(import rust-overlay)];
+        pkgs = import nixpkgs {
+          inherit system overlays;
+        };
         rustToolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
       in {
         devShells.default = with pkgs;
