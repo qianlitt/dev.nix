@@ -6,11 +6,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = {
-    self,
-    flake-parts,
-    ...
-  } @ inputs:
+  outputs = {flake-parts, ...} @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
@@ -19,11 +15,7 @@
         "aarch64-darwin"
       ];
 
-      perSystem = {
-        inputs',
-        pkgs,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         devShells.default = with pkgs;
           mkShell.override {
             # Override stdenv in order to change compiler:
