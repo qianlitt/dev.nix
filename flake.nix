@@ -14,6 +14,12 @@
       c = self.templates.c-cpp;
       cpp = self.templates.c-cpp;
 
+      python = {
+        path = ./python;
+        description = "Python development environment";
+      };
+      py = self.templates.python;
+
       rust = {
         path = ./rust;
         description = "Rust development environment";
